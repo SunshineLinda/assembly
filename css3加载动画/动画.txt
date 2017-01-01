@@ -1,0 +1,96 @@
+css动画分为两种：
+	1.transition      2.animation
+	
+	1.transition：需要事件来触发
+		      简单的动画
+		transition-property：对象中的参与过渡的属性。 
+		transition-duration：动画的持续时间
+		transition-timing-function：过渡动画的类型
+		transition-delay：动画的延迟时间
+
+
+	2.animation：关键帧动画
+		animation-name：动画名称（name..）
+		animation-duration：动画的持续时间
+		animation-delay:动画的延迟时间
+		animation-iteration-count：动画具体的循环次数（无限循环：infinite    number）
+
+		animation-direction：运动的方向
+			normal： 正常方向 
+			reverse： 反方向运行 
+			alternate： 动画先正常运行再反方向运行，并持续交替运行 
+			alternate-reverse： 动画先反运行再正方向运行，并持续交替运行 
+	
+		animation-play-state：动画的状态
+			running： 运动 
+			paused： 暂停
+		
+		animation-fill-mode：动画时间之外的状态
+			none： 默认值。动画之外的状态 
+			forwards： 动画结束时的状态 
+			backwards： 设置对象状态为动画开始时的状态 
+			both： 动画结束或开始的状态 
+
+
+		animation-timing-function：动画的过渡类型			
+			linear： 线性过渡。（0,0,1,1）
+			ease： 平滑过渡。（.25,.1,.25,1）
+			ease-in： 由慢到快。（.42,0,1,1）
+			ease-out： 由快到慢。（0,0,.58,1）
+			ease-in-out： 由慢到快再到慢。（.42,0,.58,1）
+			cubic-bezier(<number>, <number>, <number>, <number>)：贝塞尔曲线：http://cubic-bezier.com/
+					1.起始点
+					2.控制两点之间的距离
+					3.终止点
+
+
+变换transform
+	matrix()： 以一个含六值的(a,b,c,d,e,f)变换矩阵的形式指定一个2D变换，相当于直接应用一个[a,b,c,d,e,f]变换矩阵
+		   	a表示scaleX();
+			c表示skewY();
+			e表示skewX();
+			b表示scaleY();
+			d表示translateX();
+			f表示translateY();
+		
+	matrix3d()： 以一个4x4矩阵的形式指定一个3D变换  
+	translate()：平移。（x,y）
+		translatex()： X轴（水平方向）的平移 
+		translatey()： Y轴（垂直方向）的平移 
+	rotate()： 旋转。正数是顺时针旋转，负数是逆时针旋转。
+	scale()： 缩放。（x,y）
+		scalex()： X轴的（水平方向）缩放 
+		scaley()： Y轴的（垂直方向）缩放 
+	skew()： 倾斜。（x,y）
+		skewx()： X轴的（水平方向）扭曲 
+		skewy()： Y轴的（垂直方向）扭曲 
+	
+	translate3d()： （x,y,z）
+	translatez()： Z轴的平移 
+	rotate3d()： (x,y,z,0deg)
+		rotatex()：(Xdeg) 
+		rotatey()：(Ydeg)
+		rotatez()：(Zdeg) 
+	scale3d()： (x,y,z)
+	scalez()： z轴缩放 
+
+
+
+	perspective()： 指定透视距离 像素值小，在平面上看到的就大
+				     像素值大，在平面上看到的就小
+				
+	css动画手册：http://isux.tencent.com/css3/tools.html	
+
+linear-gradient下述值用来表示渐变的方向，可以使用角度或者关键字来设置：
+	<angle>： 用角度值指定渐变的方向（或角度）。 
+	to left： 设置渐变为从右到左。相当于: 270deg 
+	to right： 设置渐变从左到右。相当于: 90deg 
+	to top： 设置渐变从下到上。相当于: 0deg 
+	to bottom： 设置渐变从上到下。相当于: 180deg。
+		
+	http://www.runoob.com/css3/css3-gradients.html
+http://www.cnblogs.com/lhb25/archive/2013/01/30/css3-linear-gradient.html
+
+
+
+	

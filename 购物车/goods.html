@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en" ng-app='myapp'>
+<head>
+	<title>购物车</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<style>
+	[ng-cloak]{
+		display: none;
+	}
+	table,th,td{
+		border: 1px solid #ccc;
+		border-collapse: collapse;
+	}
+	table{
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+	th,td{
+		height: 50px;
+	}
+	img{
+		height: 100%;
+		width: :0px;
+	}
+	</style>
+</head>
+<body ng-controller='ctrl'>
+	<p><input type="text" ng-model='m'><button ng-click='search()'>搜索</button></p>
+	<table ng-cloak>
+		<tr>
+			<th>编号</th>
+			<th>商品</th>
+			<th>商品图片</th>
+			<th>数量</th>
+			<th>单价</th>
+			<th>总价</th>
+			<th>操作</th>
+		</tr>
+		<tr ng-repeat='item in tmp'>
+			<td> {{ item.id }} </td>
+			<td> {{ item.goods }} </td>
+			<td> <img ng-src="img/{{ item.img }}"> </td>
+			<td> <button ng-click='reduce(item.id)'>-</button>{{ item.num }} <button ng-click='add(item.id)'>+</button></td>
+			<td> {{ item.price }} 元</td>
+			<td> {{item.num*item.price | currency:"￥"}} </td>
+			<td> <button ng-click='remove(item.id)'>删除</button> </td>
+		</tr>
+		<tr>
+			<td>总数</td>
+			<td></td>
+			<td></td>
+			<td>{{sum()}}</td>
+			<td></td>
+			<td>{{sumPrice()|currency:"￥"}}</td>
+			<td><button ng-click='empty()'>清空</button></td>
+		</tr>
+	</table>
+</body>
+<script src='js/angular.min.js'></script>
+<script>
+	var myapp=angular.module('myapp',[]);
+		myapp.controller('ctrl',["$scope","$http","$filter",function($scope,$http,$filter){
+			$http.get("data/data.json")
+				.success(function(data){
+					$scope.datajson=$scope.tmp=data;
+				})
+				.error(function(){
+					alert("error")
+				})
+			
+			//筛选
+			$scope.search=function(){
+				$scope.tmp=$filter('filter')($scope.datajson,$scope.m);
+			}	
+
+
+			//获取总数量
+			$scope.sum=function(){
+				var num=0;
+				angular.forEach($scope.tmp,function(item,k){
+					num+=item.num;
+				})
+				return num;
+			}
+
+			//获取总价
+			$scope.sumPrice=function(){
+				var sumPrice=0;
+				angular.forEach($scope.tmp,function(item,k){
+					sumPrice+=item.num*item.price;
+				})
+				return sumPrice;
+			}
+
+			//获取当前操作的数据的索引
+			var getIndex=function(id){
+				var index=-1;
+				angular.forEach($scope.datajson,function(item,k){
+					if(item.id==id){
+						index=k;
+					}
+				})
+				return index;
+			}
+			
+			//减少数量
+			$scope.reduce=function(id){
+				var ind=getIndex(id);
+				if(ind!=-1){
+					if($scope.tmp[ind].num<=1){
+						alert(1111)
+						var re=confirm('确定要删除吗？');
+						if(re){
+							$scope.remove(re);
+						}
+					}else{
+						$scope.tmp[ind].num--;
+					}
+				}
+			}
+			//增加数量
+			$scope.add=function(id){
+				var ind=getIndex(id);
+				if(ind!=-1){
+					$scope.datajson[ind].num++;
+				}
+				
+			}
+			//删除
+			$scope.remove=function(id){
+				var ind=getIndex(id);
+				$scope.tmp.splice(ind,1);
+				$scope.sum();
+			}	
+			//清空所有列表
+			$scope.empty=function(){
+				var len=$scope.tmp.length;
+				$scope.tmp.splice(0,len);
+			}
+
+		}])
+
+
+</script>
+</html>

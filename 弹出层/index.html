@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	html,body{
+		height:100%;
+	}
+		*{
+			margin:0;padding:0;
+		}
+		li{
+			list-style:none;
+		}
+		.mark{
+			width:100%;
+			height:100%;
+			position:absolute;
+			left:0;top:0;
+			background:rgba(0,0,0,0.5);
+		}
+		.alt{
+			width:300px;
+			height:80px;
+			position:absolute;
+			left:50%;
+			top:50%;
+			margin-left:-200px;
+			margin-top:-40px;
+			z-index:99;
+			border:1px solid #000;
+			box-shadow:0 0 2px 1px #fff;
+			border-radius:5px;
+		}
+		h2{
+			width:100%;
+			height:50px;
+			line-height:50px;
+			text-align:center;
+			background:#666;
+		}
+		.ps{
+			width:100%;
+			height:30px;
+			
+		}
+		.ps span{
+			width:50%;
+			height:100%;
+			display:inline-block;
+			line-height:30px;
+			text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<ul id="list">
+		<li>000001<button>删除</button></li>
+		<li>000002<button>删除</button></li>
+		<li>000003<button>删除</button></li>
+		<li>000004<button>删除</button></li>
+		<li>000005<button>删除</button></li>
+	</ul>
+
+
+
+	<script src="jquery-1.11.1.min.js"></script>
+	<script src="index.js"></script>
+	<script>
+	$("#list").on("click","button",function(){
+		var ele=$(this);
+		$.alerter({
+			text:"确定删除吗？",
+			arr:["确定","取消"],
+			fn:function(){
+				ele.parent().remove();
+			}
+		})
+	})
+		
+	</script>
+</body>
+</html>

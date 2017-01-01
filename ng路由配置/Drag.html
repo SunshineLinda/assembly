@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" ng-app='myapp'>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		width: 100%;
+		height: 100%;
+	}
+div{
+	width: 100px;
+	height: 100px;
+	background: #f45142;
+	position: absolute;
+	color: #fff;
+	text-align: center;
+	line-height: 100px;
+	cursor: move;
+}
+
+	</style>
+</head>
+<body ng-controller='ctrl'>
+	<drag></drag>	
+</body>
+<script src='js/angular.min.js'></script>
+<script src='js/jquery.min.js'></script>
+<script>
+	var myapp=angular.module('myapp',[]);
+		myapp.directive('drag',function(){
+			return {
+				replace:true,
+				template:"<div>拖拽</div>",
+				link:function(scope,element,attrs){
+					var offsetx,offsety,x,y;
+					$(element).on('mousedown',function(e){
+						e.preventDefault();
+						offsetx=e.clientX-$(this).offset().left;
+						offsety=e.clientY-$(this).offset().top;
+
+						$(document).on('mousemove',move);
+						$(document).on('mouseup',up);
+					})
+
+					function move(e){
+						x=e.clientX-offsetx;
+						y=e.clientY-offsety;
+						if(x<0){x=0}
+						if(y<0){y=0}
+						if(x>$(window).width){x=$(window).width}
+						if(y>$(window).height){y=$(window).height}	
+						$('div').css({
+							left:x+"px",
+							top:y+"px"
+						})
+					}	
+
+					function up(e){
+						$(document).off('mousemove');
+						$(document).off('mouseup');
+					}
+
+				}
+			}
+		})
+
+		myapp.controller('ctrl',["$scope",function($scope){
+
+
+
+		}])
+	
+
+</script>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" ng-app='myapp'>
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-controller='ctrl'>
+	<siw></siw>
+</body>
+<script src='js/jquery.min.js'></script>
+<script src='js/angular.min.js'></script>
+<script>
+	var myapp=angular.module('myapp',[]);
+		myapp.directive('siw',function(){
+			return {
+				replace:true,
+				templateUrl:"./views/lunbo.html",
+
+			}
+		})
+
+	myapp.controller('ctrl',function($scope){
+
+	})
+
+
+</script>
+</html>

@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" ng-app="myapp">
+<head>
+	<meta charset="UTF-8">
+	<title>select</title>
+	<style>
+[ng-cloak]{
+	display: none;
+}
+p{
+	display: inline-block;
+	width: 100px;
+	height: 30px;
+	border: 1px solid #ccc;
+	text-align: center;
+	line-height: 30px;
+	border-collapse: collapse;
+}
+.hover{
+	color: #fff;
+	background: red;
+}
+#div1 >div,#div2 >div{
+	display: none;
+	background: #fff125;
+	border: 1px solid #eee;
+	height: 100px;
+	width:410px;
+}
+#div1 >div:nth-of-type(1){
+	display: block;
+}
+#div2 >div:nth-of-type(1){
+	display: block;
+}
+
+	</style>
+</head>
+<body ng-controller='ctrl' ng-cloak><!--ng-cloak 数据没加载 大括号{}不会显示提高用户体验 -->
+	<tap my-id='div1' my-data='info' my-fn="fn(111)">111</tap>	
+	<tap my-id='div2' my-data='info1' my-fn="fn(222)">222</tap>	
+</body>
+<script src='js/jquery.min.js'></script>
+<script src='js/angular.min.js'></script>
+<script>
+	var myapp=angular.module('myapp',[]);
+		myapp.directive("tap",function(){
+			return {
+				replace:true,// false 包含 ：<tap>  <p>....</p>    <tap>
+							 //true  替换：<p>....</p>	
+				restict:"EACM",		
+				//E:标签  <tap></tap>
+				//A:      <div tap=''></div>
+				//C:      <div class='tap'></div>
+				//M:解析注释的    <!--directive-->
+				scope:{             //隔离作用域   只能识别自定义控制器
+					myId:"@myId",   //@绑定一个自定义名 （字符串）
+					myData:"=myData",//=绑定名字对应的数据
+					myFn:'&myFn',//绑定一个函数
+				},
+				templateUrl:"./views/tap.html",
+				//template 直接使用拼接字符串
+				//templateUrl 引用一个路径页面
+				controller:["$scope",function($scope){    
+					$scope.title='科目';
+				}],
+				link:function(scope,element,attrs){//可以在angular里使用jquery
+					$(element).on('click','p',function(){
+						var ind=$(this).index();
+						$(this).addClass('hover').siblings('p').removeClass('hover');
+						$(this).parent('div').find('div').eq(ind-1).show().siblings('div').hide()
+					})
+
+				}
+			}
+		});
+		myapp.controller('ctrl',["$scope","$http",function($scope,$http){
+						//[‘$scope’,'$http',function(...,...){...}]  防止压缩是 $scope 变成单字母
+			$scope.info=[
+						{name:"张三",content:"张三详细信息"},
+						{name:"李四",content:"李四详细信息"},
+						{name:"王五",content:"王五详细信息"},
+						{name:"赵六",content:"赵六详细信息"}];
+			$scope.info1=[
+						{name:"数学",content:"数学内容"},
+						{name:"语文",content:'语文内容'},
+						{name:"音乐",content:"音乐"},
+						{name:"英语",content:"英语"}];	
+
+			$scope.title='姓名'	;		
+
+
+		}])
+</script>
+</html>

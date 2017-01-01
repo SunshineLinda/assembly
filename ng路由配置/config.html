@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" ng-app='myapp'>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>官方路由</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+div{
+	width: 100px;
+	height: 100px;
+	background: pink;
+	color: red;
+	font-weight: bold;
+}
+
+	</style>
+</head>
+<body>
+	<a href="#bj">北京</a>
+	<a href="#sh">上海</a>
+	<a href="#tj">天津</a>
+	<div ng-view></div>
+</body>
+<script src='js/angular.min.js'></script>
+<script src='js/angular-route.min.js'></script>
+<script>
+	var myapp=angular.module('myapp',['ngRoute'])
+        .config(['$routeProvider', function($routeProvider){
+                $routeProvider
+                .when('/bj',{template:"北京内容"})
+                .when('/sh',{template:"上海内容"})
+                .when('/tj',{template:"天津内容"})
+                .otherwise({
+                	redirectTo:"/bj"
+                })
+
+                }])
+
+
+
+</script>
+</html>

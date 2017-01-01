@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" ng-app='myapp'>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>第三方路由</title>
+	<style>
+div{
+	width: 100px;
+	height: 100px;
+	background: #f00;
+	color: #0f0
+}
+	</style>
+</head>
+<body>
+	<a ui-sref='bj'>北京</a>
+	<a ui-sref='sh'>上海</a>
+	<a ui-sref='tj'>天津</a>
+	<div ui-view></div>
+</body>
+<script src='js/angular.min.js'></script>
+<script src='js/angular-ui-router.min.js'></script>
+<script>
+	var myapp=angular.module('myapp',['ui.router']);
+		myapp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider) {
+			$stateProvider.state('bj',{
+				url:"/bj",
+				template:"北京内容"
+			}).state('sh',{
+				url:"/sh",
+				template:"上海内容"
+			}).state('tj',{
+				url:"/tj",
+				template:"天津内容"
+			})
+			$urlRouterProvider.when('',"/bj")
+
+
+
+
+		}])
+
+
+
+
+</script>
+</html>

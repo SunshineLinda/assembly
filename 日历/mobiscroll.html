@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>mobiscroll实例</title>
+	<link rel="stylesheet" href="css/mobiscroll.min.css">
+	<style>
+#inp{
+	outline: none;
+	border: 1px solid #821401;
+}
+	</style>
+</head>
+<body>
+	<p><input type="text" id='inp' placeholder='日历插件'></p>
+</body>
+<script src="../lib/jquery.min.js"></script>
+<script src='../lib/mobiscroll.min.js'></script>
+<script>
+$(function(){
+	 var now = new Date(),//获取当前日期
+         year = now.getFullYear(),
+         month = now.getMonth();
+	//调用插件
+	$('#inp').mobiscroll().calendar({
+		theme:'mobiscroll',//日历风格、主题默认 mobiscroll
+		display: 'bottom',// 出现的位置 top：上往下显示    /inline：直接显示
+		//controls: ['calendar'],//只显示日历
+		lang: 'zh',//语言
+		counter: false	,
+		//selectedValues: [new Date(year, month, 1), new Date(year, month, 2), new Date(year, month, 10)]
+		cancelText:"取消",  //取消 文字
+		dateFormat:"yy年mm月dd日",//显示在页面的日期格式
+		swipeDirection: 'vertical',//滑动方向
+		headerText: '日历',//显示在日历上的标题文字
+		controls: ['calendar','date'],//显示在日历上的Tap 切换[日历，time时间，日]
+		buttons: [],//取消确定按钮 不显示  直接更改页面日期
+		closeOnSelect: false,//当点击日期 日历自动消失
+		//invalid: ['w0', 'w6', '5/1', '12/24', '12/20'],//w列不能点击    对应的日期不能点击
+		layout: 'fixed',//布局
+		weekCounter: 'day',//左侧边栏序号
+		rtl: false,//年《----》月 位置
+		markedText: true,//是否显示 标记的文字
+		marked: [{//  添加图标  
+          d:"11/11" ,
+          //icon:"home",
+          color:"red",//red  #f00   rgb(250,250,250)
+          text:"hello"
+        }]
+
+	})
+
+
+
+
+	
+})
+
+
+</script>
+
+</html>

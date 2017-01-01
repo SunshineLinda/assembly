@@ -1,0 +1,36 @@
+[{
+	"id":"1",
+	"goods":"苹果",
+	"img":"get.jpg",
+	"num":1,
+	"price":5
+	},
+ {
+	"id":"2",
+	"goods":"香蕉",
+	"img":"get2.jpg",
+	"num":1,
+	"price":2
+	},
+{
+	"id":"3",
+	"goods":"荔枝",
+	"img":"get3.jpg",
+	"num":1,
+	"price":18
+	},
+{
+	"id":"4",
+	"goods":"雪梨",
+	"img":"get4.jpg",
+	"num":1,
+	"price":4
+	},	
+{
+	"id":"5",
+	"goods":"蓝莓",
+	"img":"get5.jpg",
+	"num":1,
+	"price":22
+	}	
+]

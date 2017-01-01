@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+	<style>		
+		
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		.box {
+			width: 100%;
+			height: 150px;
+			background: #f00;
+			color:#ff0;
+			left: -100%;
+			/* transition:0.5s;
+			transform:translate3d(-100%,0,0); */
+			position: absolute;
+		}
+		input{
+			width: 100px;
+			height: 100px;
+		}
+	
+		
+		
+	</style>
+</head>
+<body ng-controller="ctrl">
+
+<input type="checkbox" ng-model="test"> 
+<div class="box" ng-show="test">测试</div>
+
+<script src="./js/jquery-1.10.1.min.js"></script>
+<script src="./js/angular.min.js"></script>
+<script src="./js/angular-animate.min.js"></script>
+	
+<script>
+	
+	
+  var app=angular.module('myApp',['ngAnimate']);	
+	
+	  app.animation('.box',function() {
+		   var obj={
+			    removeClass:function(el,done){
+			    	$(el).animate({left:0},1000);
+			    },
+			    addClass:function(el,done){
+			    	$(el).animate({left:"-100%"},1000)
+			    },
+
+			}
+
+	  		return obj;
+	  
+	  
+	  });
+	
+	  app.controller('ctrl',['$scope',function($scope) {
+		 $scope.test=false;
+		  
+	  }]);
+	
+</script>		
+</body>
+</html>
